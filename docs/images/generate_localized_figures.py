@@ -2,8 +2,8 @@
 """Rebuild localized README figures for Español and Português (Brasil).
 
 Trend charts keep the English SVG geometry and every numeric label. Only the
-palette, typography, and prose change. Hero banners and the architecture
-diagram are drawn here so both themes can be regenerated.
+palette, typography, and prose change. The architecture diagram is drawn here
+so both themes can be regenerated. The hero banner stays the original photo.
 
     python3 docs/images/generate_localized_figures.py
 """
@@ -267,130 +267,6 @@ def svg_header(width: int, height: int, title: str, desc: str) -> str:
     )
 
 
-def hero_svg(lang: str, theme: str) -> str:
-    dark = theme == "dark"
-    bg = "#07111F" if dark else "#F5F8FC"
-    ink = "#F8FAFC" if dark else "#0B1220"
-    muted = "#94A3B8" if dark else "#475569"
-    panel = "#102033" if dark else "#FFFFFF"
-    panel_stroke = "#1E3A5F" if dark else "#D7E3F4"
-    grid = "#13283F" if dark else "#E6EEF8"
-    beam = "#38BDF8" if dark else "#0284C7"
-    beam_soft = "#818CF8" if dark else "#6366F1"
-    subtitle = {
-        "es": "Prompts y cadena de evaluación reproducible",
-        "pt": "Prompts e cadeia de avaliação reproduzível",
-    }[lang]
-    title = "gpt-instruct"
-    parts = [svg_header(1856, 1044, title, subtitle)]
-    parts.append(
-        f"""<defs>
-  <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0" stop-color="{"#E2E8F0" if dark else "#FFFFFF"}"/>
-    <stop offset="0.42" stop-color="{"#64748B" if dark else "#94A3B8"}"/>
-    <stop offset="1" stop-color="{"#CBD5E1" if dark else "#E2E8F0"}"/>
-  </linearGradient>
-  <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="{beam}" stop-opacity="0"/>
-    <stop offset="0.18" stop-color="{beam}" stop-opacity="0.95"/>
-    <stop offset="0.72" stop-color="{beam_soft}" stop-opacity="0.9"/>
-    <stop offset="1" stop-color="{beam_soft}" stop-opacity="0"/>
-  </linearGradient>
-  <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-    <stop offset="0" stop-color="{beam}" stop-opacity="{"0.55" if dark else "0.35"}"/>
-    <stop offset="1" stop-color="{beam}" stop-opacity="0"/>
-  </radialGradient>
-  <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-    <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="{"#020617" if dark else "#0F172A"}" flood-opacity="{"0.45" if dark else "0.08"}"/>
-  </filter>
-  <pattern id="hex" width="28" height="24" patternUnits="userSpaceOnUse">
-    <path d="M14 1 L26 8 L26 20 L14 27 L2 20 L2 8 Z" fill="none" stroke="{beam}" stroke-opacity="0.45" stroke-width="1"/>
-  </pattern>
-  <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
-    <circle cx="2" cy="2" r="1.3" fill="{beam_soft}" fill-opacity="0.8"/>
-  </pattern>
-  <pattern id="grain" width="8" height="10" patternUnits="userSpaceOnUse">
-    <path d="M0 5 H8" stroke="{muted}" stroke-opacity="0.35" stroke-width="1"/>
-  </pattern>
-</defs>
-<rect width="1856" height="1044" fill="{bg}"/>
-<g stroke="{grid}" stroke-width="1">
-"""
-    )
-    for x in range(80, 1800, 80):
-        parts.append(f'<line x1="{x}" y1="40" x2="{x}" y2="760"/>')
-    for y in range(40, 760, 80):
-        parts.append(f'<line x1="40" y1="{y}" x2="1816" y2="{y}"/>')
-    parts.append("</g>")
-    parts.append(f'<circle cx="150" cy="120" r="46" fill="none" stroke="{grid}" stroke-width="1.5"/>')
-    parts.append(f'<circle cx="150" cy="120" r="6" fill="{beam}"/>')
-    parts.append(f'<circle cx="1710" cy="150" r="36" fill="none" stroke="{grid}" stroke-width="1.5"/>')
-    parts.append(f'<ellipse cx="1080" cy="390" rx="460" ry="150" fill="url(#glow)"/>')
-    parts.append(
-        f'<line x1="220" y1="390" x2="1720" y2="390" stroke="{beam}" stroke-width="22" stroke-linecap="round" opacity="{"0.28" if dark else "0.18"}"/>'
-    )
-    parts.append(
-        f'<line x1="220" y1="390" x2="1720" y2="390" stroke="url(#beam)" stroke-width="3.5" stroke-linecap="round"/>'
-    )
-    panels = [
-        (620, "hex", "url(#hex)"),
-        (812, "net", None),
-        (1004, "crack", None),
-        (1196, "grain", "url(#grain)"),
-        (1388, "dots", "url(#dots)"),
-    ]
-    for x, kind, pattern in panels:
-        parts.append(
-            f'<g filter="url(#soft)"><rect x="{x}" y="130" width="168" height="520" rx="22" fill="{panel}" fill-opacity="{"0.78" if dark else "0.9"}" stroke="{panel_stroke}" stroke-width="1.5"/>'
-        )
-        parts.append(
-            f'<clipPath id="c{x}"><rect x="{x+10}" y="146" width="148" height="488" rx="14"/></clipPath>'
-        )
-        parts.append(f'<g clip-path="url(#c{x})">')
-        if pattern:
-            parts.append(f'<rect x="{x}" y="130" width="168" height="520" fill="{pattern}"/>')
-        if kind == "net":
-            parts.append(
-                f'<g fill="none" stroke="{beam}" stroke-opacity="0.55" stroke-width="1.2">'
-                f'<path d="M{x+20} 220 C {x+70} 180, {x+90} 280, {x+146} 210"/>'
-                f'<path d="M{x+24} 340 C {x+80} 300, {x+70} 420, {x+150} 360"/>'
-                f'<path d="M{x+30} 480 C {x+90} 430, {x+100} 540, {x+140} 500"/>'
-                f"</g>"
-            )
-            for cx, cy in ((40, 210), (90, 250), (70, 360), (130, 330), (50, 470), (120, 500)):
-                parts.append(f'<circle cx="{x+cx}" cy="{cy}" r="3.2" fill="{beam}"/>')
-        if kind == "crack":
-            parts.append(
-                f'<g fill="none" stroke="{muted}" stroke-opacity="0.75" stroke-width="1.3">'
-                f'<path d="M{x+84} 170 L {x+70} 250 L {x+108} 310 L {x+64} 390 L {x+112} 470 L {x+78} 590"/>'
-                f'<path d="M{x+70} 250 L {x+36} 290"/><path d="M{x+108} 310 L {x+138} 340"/>'
-                f'<path d="M{x+64} 390 L {x+40} 430"/><path d="M{x+112} 470 L {x+140} 510"/>'
-                f"</g>"
-            )
-        parts.append("</g></g>")
-    # Instrument in front of the first panels, tip at the third slab.
-    parts.append(
-        f'''<g filter="url(#soft)">
-  <path d="M148 390
-           C 280 356, 560 364, 900 382
-           L 1036 390
-           L 900 398
-           C 560 416, 280 424, 148 390 Z" fill="url(#metal)"/>
-  <path d="M170 390 H900" stroke="{"#F8FAFC" if dark else "#FFFFFF"}" stroke-opacity="0.85" stroke-width="1.6"/>
-</g>
-<line x1="1024" y1="390" x2="1720" y2="390" stroke="{beam}" stroke-width="2.4" stroke-linecap="round"/>
-<circle cx="1036" cy="390" r="4.5" fill="{"#E0F2FE" if dark else "#FFFFFF"}" stroke="{beam}" stroke-width="2"/>'''
-    )
-    parts.append(
-        f'<text x="928" y="900" text-anchor="middle" font-family="{SANS}" font-size="92" font-weight="700" fill="{ink}" letter-spacing="-2">{title}</text>'
-    )
-    parts.append(
-        f'<text x="928" y="968" text-anchor="middle" font-family="{SANS}" font-size="32" font-weight="500" fill="{muted}">{html.escape(subtitle)}</text>'
-    )
-    parts.append("</svg>\n")
-    return "".join(parts)
-
-
 ARCH = {
     "es": {
         "title": "Arquitectura de prompts de ruptura",
@@ -604,9 +480,6 @@ def rasterize(svg_path: Path, dest: Path, width: int) -> None:
 def write_rasters() -> None:
     for lang in ("es", "pt"):
         for theme in ("light", "dark"):
-            hero = ROOT / f"gpt-instruct-hero-{lang}-{theme}.svg"
-            hero.write_text(hero_svg(lang, theme), encoding="utf-8")
-            rasterize(hero, ROOT / f"gpt-instruct-hero-{lang}-{theme}.webp", 1856)
             arch = ROOT / f"project-architecture-{lang}-{theme}.svg"
             arch.write_text(architecture_svg(lang, theme), encoding="utf-8")
             rasterize(arch, ROOT / f"project-architecture-{lang}-{theme}.webp", 2400)
@@ -615,7 +488,7 @@ def write_rasters() -> None:
 def main() -> None:
     charts = write_charts()
     write_rasters()
-    print(f"wrote {len(charts)} charts and localized hero/architecture rasters")
+    print(f"wrote {len(charts)} charts and localized architecture rasters")
 
 
 if __name__ == "__main__":

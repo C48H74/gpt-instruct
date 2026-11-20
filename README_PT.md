@@ -1,9 +1,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/images/gpt-instruct-hero-pt-dark.webp" />
-  <source media="(prefers-color-scheme: light)" srcset="docs/images/gpt-instruct-hero-pt-light.webp" />
-  <img src="docs/images/gpt-instruct-hero-pt-light.webp" alt="gpt-instruct: prompts e cadeia de avaliação" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/gpt-instruct-hero-dark.webp" />
+  <source media="(prefers-color-scheme: light)" srcset="docs/images/gpt-instruct-hero-light.webp" />
+  <img src="docs/images/gpt-instruct-hero-light.webp" alt="gpt-instruct: prompts e cadeia de avaliação" width="100%" />
 </picture><br />
 <img src="docs/images/readme-spacer.png" alt="" width="1" height="5" />
 
