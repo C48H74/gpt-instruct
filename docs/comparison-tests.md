@@ -1,6 +1,8 @@
 # 对比测试
 
-[返回中文首页](../README.md) · **简体中文** · [English](comparison-tests-en.md)
+[Español](comparison-tests-es.md) · [Português](comparison-tests-pt.md) · [English](comparison-tests-en.md) · **简体中文**
+
+[Inicio](../README.md) · [Português](../README_PT.md) · [English](../README_EN.md) · [返回中文首页](../README_ZH.md)
 
 本文集中记录 `gpt-instruct` 三个产品分支的版本回归、上游对比、跨模型迁移和典型案例结果。`gpt-6-astra` 与 `gpt-6.1-sol` 从 e8b9 起作为两条独立优化线；首页只保留已发布结论摘要，A/B/C 方法、当前可比数据、失败类型和历史证据统一维护在这里。
 

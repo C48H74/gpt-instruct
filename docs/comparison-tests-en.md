@@ -1,6 +1,8 @@
 # Comparison Tests
 
-[中文](comparison-tests.md) · **English** · [Back to English Home](../README_EN.md)
+[Español](comparison-tests-es.md) · [Português](comparison-tests-pt.md) · **English** · [简体中文](comparison-tests.md)
+
+[Inicio](../README.md) · [Português](../README_PT.md) · [English home](../README_EN.md) · [简体中文](../README_ZH.md)
 
 This page centralizes version regressions, upstream comparisons, cross-model transfer results, and representative cases for all three `gpt-instruct` product branches. Starting at e8b9, `gpt-6-astra` and `gpt-6.1-sol` are independent optimization lines. The home page keeps only published summaries; A/B/C methodology, comparable results, failure categories, and historical evidence live here.
 

@@ -18,15 +18,17 @@
 </p>
 
 <p>
-  <a href="README_EN.md"><img src="https://img.shields.io/badge/lang-English-blue.svg" alt="English" /></a>
-  <a href="README.md"><img src="https://img.shields.io/badge/语言-简体中文-red.svg" alt="简体中文" /></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/lang-Espa%C3%B1ol-1D4ED8.svg" alt="Español" /></a>
+  <a href="README_PT.md"><img src="https://img.shields.io/badge/lang-Portugu%C3%AAs-0F766E.svg" alt="Português" /></a>
+  <a href="README_EN.md"><img src="https://img.shields.io/badge/lang-English-2563EB.svg" alt="English" /></a>
+  <a href="README_ZH.md"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-B91C1C.svg" alt="简体中文" /></a>
 </p>
 
 <h1>gpt-instruct</h1>
 
 </div>
 
-<!-- README_SYNC: Keep README.md and README_EN.md synchronized; publish paired localized diagrams. -->
+<!-- README_SYNC: Keep README.md, README_PT.md, README_EN.md, and README_ZH.md synchronized; publish paired localized diagrams. -->
 
 ## Overview
 
@@ -155,7 +157,7 @@ python3 scripts/verify_gpt56_sol_regression_scoring.py
 python3 -m unittest discover -s unit-tests -q
 ```
 
-See the [Chinese comparison guide](docs/comparison-tests.md) and [English comparison guide](docs/comparison-tests-en.md) for methods, historical evidence, and failure categories.
+See the [Spanish comparison guide](docs/comparison-tests-es.md), [Portuguese comparison guide](docs/comparison-tests-pt.md), [English comparison guide](docs/comparison-tests-en.md), and [Chinese comparison guide](docs/comparison-tests.md) for methods, historical evidence, and failure categories.
 
 ## Modular JB-A / JB-B Evaluation
 
@@ -212,7 +214,7 @@ locks, split proof, method limitations, and free ordering.
 
 ```text
 gpt-instruct/
-├── README.md / README_EN.md              # Chinese and English home pages
+├── README.md / README_PT.md / README_EN.md / README_ZH.md  # ES, PT, EN, ZH homes
 ├── codex-instruct.py                     # Published-version selection, deployment, and rollback
 ├── sync-archives.py                      # Source-to-ZIP synchronization
 ├── gpt-5.6-sol-v45.md/.zip               # Current stable production release
